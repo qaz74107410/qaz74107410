@@ -4,66 +4,34 @@
       "repo": "toms-storage-search-cache",
       "index": "01",
       "title": "Tom's Storage Search Cache",
-      "hook": ["A mixin that kills the per-keystroke", "freeze in Minecraft storage terminals."],
-      "tag": "Forge mod · mixins",
+      "hook": ["Profiled a render-thread stall, fixed it", "by changing cache lifetime, not logic."],
+      "tag": "Java · mixins · JFR",
       "metric": "−75% render thread",
       "featured": true
     },
     {
-      "repo": "phasmo-notebooklm-bot",
+      "repo": "my-jira-webui",
       "index": "02",
-      "title": "Phasmo NotebookLM Bot",
-      "hook": ["A Discord bot that owns no model — it", "proxies your own NotebookLM notebook."],
-      "tag": "Bot · Docker",
-      "metric": "no local model",
+      "title": "Jira Issues Web UI",
+      "hook": ["Issues grouped by parent, so a project", "reads like a tree instead of a list."],
+      "tag": "Next.js · Jest",
+      "metric": "tested · live demo",
       "featured": true
     },
     {
-      "repo": "fb-page-scraper",
-      "index": "03",
-      "title": "Facebook Page Scraper",
-      "hook": ["The senior project people still clone —", "the oldest repo of mine in use."],
-      "tag": "Python · scraper",
-      "featured": false
-    },
-    {
-      "repo": "my-jira-webui",
-      "index": "04",
-      "title": "Jira Issues Web UI",
-      "hook": ["Issues grouped by parent, so a project", "reads like a tree instead of a list."],
-      "tag": "Next.js · TypeScript",
-      "featured": false
-    },
-    {
-      "repo": "project-opener-cli",
-      "index": "05",
-      "title": "Project Opener",
-      "hook": ["Fuzzy-search every local repo and open", "the right one without leaving the shell."],
-      "tag": "Node CLI",
-      "featured": false
-    },
-    {
-      "repo": "midi-flashcard-web",
-      "index": "06",
-      "title": "Music Flashcards",
-      "hook": ["Note reading drilled on a real MIDI", "keyboard, rendered with VexFlow."],
-      "tag": "Svelte · VexFlow",
-      "featured": false
-    },
-    {
       "repo": "random-container-no",
-      "index": "07",
+      "index": "03",
       "title": "Container Number Generator",
       "hook": ["ISO 6346 check digits, generated and", "validated in the browser."],
-      "tag": "Next.js · TypeScript",
+      "tag": "Logistics · TypeScript",
       "featured": false
     },
     {
-      "repo": "watchtower-line-notifier",
-      "index": "08",
-      "title": "Watchtower LINE Notifier",
-      "hook": ["Docker image updates land in LINE", "instead of a log nobody watches."],
-      "tag": "Go · webhooks",
+      "repo": "phasmo-notebooklm-bot",
+      "index": "04",
+      "title": "Phasmo NotebookLM Bot",
+      "hook": ["A Discord bot that owns no model — it", "proxies your own NotebookLM notebook."],
+      "tag": "Python · Docker",
       "featured": false
     }
   ]

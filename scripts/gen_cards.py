@@ -318,7 +318,7 @@ def main():
     contrib, cdata = contributions_svg(user)
 
     written = {}
-    for name, svg in (("stats.svg", stats), ("langs.svg", langs), ("contributions.svg", contrib)):
+    for name, svg in (("stats.svg", stats), ("langs.svg", langs)):
         path = os.path.join(ASSETS, name)
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)
