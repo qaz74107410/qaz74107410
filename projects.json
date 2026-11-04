@@ -17,35 +17,35 @@
       "featured": true
     },
     {
-      "repo": "my-jira-webui",
+      "repo": "fb-page-scraper",
       "index": "03",
+      "title": "Facebook Page Scraper",
+      "hook": ["The senior project people still clone —", "the oldest repo of mine in use."],
+      "tag": "Python · scraper",
+      "featured": false
+    },
+    {
+      "repo": "my-jira-webui",
+      "index": "04",
       "title": "Jira Issues Web UI",
       "hook": ["Issues grouped by parent, so a project", "reads like a tree instead of a list."],
       "tag": "Next.js · TypeScript",
       "featured": false
     },
     {
-      "repo": "watchtower-line-notifier",
-      "index": "04",
-      "title": "Watchtower LINE Notifier",
-      "hook": ["Docker image updates land in LINE", "instead of a log nobody watches."],
-      "tag": "Go · webhooks",
+      "repo": "project-opener-cli",
+      "index": "05",
+      "title": "Project Opener",
+      "hook": ["Fuzzy-search every local repo and open", "the right one without leaving the shell."],
+      "tag": "Node CLI",
       "featured": false
     },
     {
       "repo": "midi-flashcard-web",
-      "index": "05",
+      "index": "06",
       "title": "Music Flashcards",
       "hook": ["Note reading drilled on a real MIDI", "keyboard, rendered with VexFlow."],
       "tag": "Svelte · VexFlow",
-      "featured": false
-    },
-    {
-      "repo": "project-opener-cli",
-      "index": "06",
-      "title": "Project Opener",
-      "hook": ["Fuzzy-search every local repo and open", "the right one without leaving the shell."],
-      "tag": "Node CLI",
       "featured": false
     },
     {
@@ -57,11 +57,11 @@
       "featured": false
     },
     {
-      "repo": "cccregister",
+      "repo": "watchtower-line-notifier",
       "index": "08",
-      "title": "cccregister",
-      "hook": ["Retries a registration site until a slot", "actually opens — then plays a sound."],
-      "tag": "Node · automation",
+      "title": "Watchtower LINE Notifier",
+      "hook": ["Docker image updates land in LINE", "instead of a log nobody watches."],
+      "tag": "Go · webhooks",
       "featured": false
     }
   ]

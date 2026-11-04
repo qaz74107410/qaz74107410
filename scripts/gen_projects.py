@@ -85,9 +85,10 @@ def card(p, meta):
     # index + stars
     s.append(f'  <text x="26" y="36" font-family="{MONO}" font-size="12" letter-spacing="1.6" '
              f'fill="{DIM}">{esc(p["index"])}</text>')
-    star_txt = f'★ {stars}' if stars else '☆ 0'
-    s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{FONT}" font-size="13" '
-             f'fill="{EMERALD if stars else DIM}">{esc(star_txt)}</text>')
+    star_txt = f'★ {stars}' if stars else ''
+    if star_txt:
+        s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{FONT}" font-size="13" '
+                 f'fill="{EMERALD}">{esc(star_txt)}</text>')
 
     # title
     s.append(f'  <text x="26" y="78" font-family="{FONT}" font-size="21" font-weight="700" '
