@@ -21,10 +21,10 @@
   <rect x="26" y="40" width="26" height="2" rx="1" fill="url(#accent)"/>
   <clipPath id="barclip"><rect x="26" y="58" width="848" height="14" rx="7"/></clipPath>
   <g clip-path="url(#barclip)">
-    <rect x="26.00" y="58" width="429.40" height="14" fill="#34D399" fill-opacity="0.92"/>
-    <rect x="455.40" y="58" width="294.87" height="14" fill="#22D3EE" fill-opacity="0.92"/>
+    <rect x="26.00" y="58" width="429.39" height="14" fill="#34D399" fill-opacity="0.92"/>
+    <rect x="455.39" y="58" width="294.88" height="14" fill="#22D3EE" fill-opacity="0.92"/>
     <rect x="750.27" y="58" width="46.96" height="14" fill="#3B82F6" fill-opacity="0.92"/>
-    <rect x="797.24" y="58" width="37.51" height="14" fill="#A78BFA" fill-opacity="0.92"/>
+    <rect x="797.23" y="58" width="37.51" height="14" fill="#A78BFA" fill-opacity="0.92"/>
     <rect x="834.75" y="58" width="21.39" height="14" fill="#FBBF24" fill-opacity="0.92"/>
     <rect x="856.14" y="58" width="5.23" height="14" fill="#F472B6" fill-opacity="0.92"/>
     <rect x="861.37" y="58" width="12.63" height="14" fill="#64748B" fill-opacity="0.92"/>
