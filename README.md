@@ -22,6 +22,11 @@ Most of it is TypeScript and Python with a healthy amount of Java, and it usuall
   <img src="https://img.shields.io/badge/Linux-0B0F14?style=flat-square&logo=linux&logoColor=34D399" alt="Linux" />
 </p>
 
+<p>
+  <a href="https://my-portflio-navy.vercel.app"><img src="https://img.shields.io/badge/Portfolio-34D399?style=for-the-badge&logo=vercel&logoColor=0B0F14" alt="Portfolio" /></a>
+  <a href="https://www.linkedin.com/in/komsan-nipharat-187573211"><img src="https://img.shields.io/badge/LinkedIn-0B0F14?style=for-the-badge&logo=linkedin&logoColor=34D399" alt="LinkedIn" /></a>
+</p>
+
 ## Selected work
 
 <table>
@@ -80,7 +85,7 @@ The interesting part is auth. NotebookLM has no API key, so a one-time `notebook
 
 <img src="./assets/langs.svg" alt="Language mix across owned repositories" width="100%" />
 
-<img src="./assets/contributions.svg" alt="Contribution heatmap, last 12 months" width="100%" />
+<img src="./assets/shooter.svg" alt="Space shooter: every active day of the last 12 months is an invader, and a ship clears the wave" width="100%" />
 
 <img src="./profile-3d-contrib/profile-night-green.svg" alt="3D contribution graph, last 12 months" width="100%" />
 
@@ -98,4 +103,4 @@ The interesting part is auth. NotebookLM has no API key, so a one-time `notebook
 
 <br />
 
-<sub>Banner, stat, language, heatmap and project cards are generated from the GitHub API by <a href="./scripts/gen_cards.py"><code>gen_cards.py</code></a> and <a href="./scripts/gen_projects.py"><code>gen_projects.py</code></a>, refreshed daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a> — no third-party image services, so they don't break when someone else's rate limit does.</sub>
+<sub>Banner, stat, language, shooter and project cards are generated from the GitHub API by <a href="./scripts/gen_cards.py"><code>gen_cards.py</code></a>, <a href="./scripts/gen_shooter.py"><code>gen_shooter.py</code></a> and <a href="./scripts/gen_projects.py"><code>gen_projects.py</code></a>, refreshed daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a> — no third-party image services, so they don't break when someone else's rate limit does.</sub>

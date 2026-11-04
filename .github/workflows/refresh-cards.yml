@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/gen_cards.py"
+      - "scripts/gen_shooter.py"
       - ".github/workflows/refresh-cards.yml"
 
 permissions:
@@ -32,6 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 scripts/gen_cards.py "${{ github.repository_owner }}"
+          python3 scripts/gen_shooter.py "${{ github.repository_owner }}"
           python3 scripts/gen_projects.py "${{ github.repository_owner }}"
 
       - name: Render the 3D contribution graph
