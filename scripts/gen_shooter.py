@@ -20,12 +20,9 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_cards import graphql  # noqa: E402
-from manifest_style import (  # noqa: E402
-    ASSETS, FORM, FORM_SOFT, PAPER, PAPER_DEEP, RULE, STAMP, TYPED, TYPED_SOFT, Sheet,
-)
+from manifest_style import ASSETS, Sheet, suffix
+from manifest_style import T as THEME  # noqa: E402
 
-# box fills by activity level: form-ink tints on the paper
-LEVELS = [PAPER_DEEP, "#8DAE9C", "#5E8C75", "#3B6B55", FORM]
 
 CELL, GAP = 11, 3
 STEP = CELL + GAP
@@ -118,37 +115,37 @@ def build(user):
     total = cal["totalContributions"]
     sh = Sheet(W, H, f"Voyage log: {len(targets)} active days, {total} contributions; "
                      "a ship clears each day of the last 12 months, then the wave resets")
-    sh.text(22, 36, "VOYAGE LOG", "title", 22, FORM, extra='letter-spacing="0.4"')
-    sh.label(176, 35, "Last 12 months, one cargo box per active day", 11.5, FORM_SOFT)
-    sh.label(W - 22, 22, "Cargo cleared", 10.5, FORM, "end")
-    sh.text(W - 22, 42, f"{total:,} contributions", "typedb", 15, TYPED, "end")
-    sh.hline(54, color=FORM, w=1.5)
+    sh.text(22, 36, "VOYAGE LOG", "title", 22, THEME.FORM, extra='letter-spacing="0.4"')
+    sh.label(176, 35, "Last 12 months, one cargo box per active day", 11.5, THEME.FORM_SOFT)
+    sh.label(W - 22, 22, "Cargo cleared", 10.5, THEME.FORM, "end")
+    sh.text(W - 22, 42, f"{total:,} contributions", "typedb", 15, THEME.TYPED, "end")
+    sh.hline(54, color=THEME.FORM, w=1.5)
     for row, name in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
-        sh.label(20, GY + row * STEP + 9, name, 9.5, FORM_SOFT)
+        sh.label(20, GY + row * STEP + 9, name, 9.5, THEME.FORM_SOFT)
 
     sh.raw('<g>')
     sh.raw('<animateTransform attributeName="transform" type="translate" '
            'values="0,0;0,2;0,0" dur="2.4s" repeatCount="indefinite"/>')
     for x, y in cells:
-        sh.raw(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="1.5" fill="{PAPER_DEEP}"/>')
+        sh.raw(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="1.5" fill="{THEME.PAPER_DEEP}"/>')
     for tg in targets:
         h = tg["hit"]
         sh.raw(
             f'<rect x="{tg["x"]}" y="{tg["y"]}" width="{CELL}" height="{CELL}" rx="1.5" '
-            f'fill="{LEVELS[tg["lvl"]]}"><title>{tg["date"]}: {tg["count"]}</title>'
+            f'fill="{THEME.LEVELS[tg["lvl"]]}"><title>{tg["date"]}: {tg["count"]}</title>'
             f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="{kt([0, h, h + 0.1, T])}" '
             f'dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
         cx, cy = tg["x"] + CELL / 2.0, tg["y"] + CELL / 2.0
         k = kt([0, h, h + eps, h + 0.38, T])
         sh.raw(
-            f'<circle cx="{cx}" cy="{cy}" r="2" fill="none" stroke="{STAMP}" stroke-width="1.5" opacity="0">'
+            f'<circle cx="{cx}" cy="{cy}" r="2" fill="none" stroke="{THEME.STAMP}" stroke-width="1.5" opacity="0">'
             f'<animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
             f'<animate attributeName="r" values="2;2;2;10;10" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
             '</circle>')
     sh.raw('</g>')
 
     # shot
-    sh.raw(f'<rect x="-1.5" y="0" width="3" height="9" rx="1.5" fill="{STAMP}" opacity="0">'
+    sh.raw(f'<rect x="-1.5" y="0" width="3" height="9" rx="1.5" fill="{THEME.STAMP}" opacity="0">'
            f'<animate attributeName="x" values="{";".join("%.1f" % (px - 1.5) for _, px in ship)}" '
            f'keyTimes="{ship_k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
            f'<animate attributeName="y" values="{";".join("%.1f" % v for v in bullet_y)}" '
@@ -161,28 +158,28 @@ def build(user):
            f'<animateTransform attributeName="transform" type="translate" '
            f'values="{";".join("%.1f,%d" % (px, SHIP_Y) for _, px in ship)}" keyTimes="{ship_k}" '
            f'dur="{T:.2f}s" repeatCount="indefinite"/>'
-           f'<path d="M-22 2 L22 2 L17 11 L-18 11 Z" fill="{FORM}"/>'
-           f'<rect x="-17" y="-6" width="9" height="7" fill="{STAMP}"/>'
-           f'<rect x="-7" y="-6" width="9" height="7" fill="{FORM_SOFT}"/>'
-           f'<rect x="3" y="-6" width="9" height="7" fill="{TYPED}"/>'
-           f'<rect x="-2" y="-13" width="6" height="7" fill="{FORM}"/>'
-           f'<rect x="14" y="-9" width="6" height="10" fill="{FORM}"/></g>')
+           f'<path d="M-22 2 L22 2 L17 11 L-18 11 Z" fill="{THEME.FORM}"/>'
+           f'<rect x="-17" y="-6" width="9" height="7" fill="{THEME.STAMP}"/>'
+           f'<rect x="-7" y="-6" width="9" height="7" fill="{THEME.FORM_SOFT}"/>'
+           f'<rect x="3" y="-6" width="9" height="7" fill="{THEME.TYPED}"/>'
+           f'<rect x="-2" y="-13" width="6" height="7" fill="{THEME.FORM}"/>'
+           f'<rect x="14" y="-9" width="6" height="10" fill="{THEME.FORM}"/></g>')
     # waterline
-    sh.hline(SHIP_Y + 14, 22, W - 22, RULE)
+    sh.hline(SHIP_Y + 14, 22, W - 22, THEME.RULE)
 
-    sh.hline(H - 34, color=FORM, w=1)
+    sh.hline(H - 34, color=THEME.FORM, w=1)
     sh.text(22, H - 13, f"{len(targets)} active days. Peak {peak} in a day. Darker box, busier day.",
-            "typed", 12.5, TYPED_SOFT)
-    sh.label(W - 22, H - 14, "Retyped daily from the GitHub API", 10.5, FORM_SOFT, "end")
+            "typed", 12.5, THEME.TYPED_SOFT)
+    sh.label(W - 22, H - 14, "Retyped daily from the GitHub API", 10.5, THEME.FORM_SOFT, "end")
 
     # all cargo cleared: the stamp comes down, holds, lifts
     ko = kt([0, end + 0.3, end + 0.5, T - 0.4, T])
     sh.raw(f'<g opacity="0" transform="translate({home:.0f} {GY + 3.5 * STEP}) rotate(-6)">'
            f'<animate attributeName="opacity" values="0;0;0.92;0.92;0" keyTimes="{ko}" dur="{T:.2f}s" repeatCount="indefinite"/>'
-           f'<rect x="-150" y="-34" width="300" height="68" rx="5" fill="{PAPER}" stroke="{STAMP}" stroke-width="3"/>'
-           f'<rect x="-143" y="-27" width="286" height="54" rx="3" fill="none" stroke="{STAMP}" stroke-width="1.2"/>')
-    sh.text(0, -2, "ALL CARGO CLEARED", "title", 22, STAMP, "middle", 'letter-spacing="1"')
-    sh.text(0, 19, "new manifest tomorrow", "typedb", 13, STAMP, "middle")
+           f'<rect x="-150" y="-34" width="300" height="68" rx="5" fill="{THEME.PAPER}" stroke="{THEME.STAMP}" stroke-width="3"/>'
+           f'<rect x="-143" y="-27" width="286" height="54" rx="3" fill="none" stroke="{THEME.STAMP}" stroke-width="1.2"/>')
+    sh.text(0, -2, "ALL CARGO CLEARED", "title", 22, THEME.STAMP, "middle", 'letter-spacing="1"')
+    sh.text(0, 19, "new manifest tomorrow", "typedb", 13, THEME.STAMP, "middle")
     sh.raw('</g>')
     svg = sh.render(top=True, bottom=True)
     return svg, dict(targets=len(targets), seconds=round(T, 1), total=total)
@@ -193,11 +190,14 @@ def main():
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if not token:
         raise SystemExit("GITHUB_TOKEN not set")
-    svg, info = build(graphql(token, login))
+    user = graphql(token, login)
     os.makedirs(ASSETS, exist_ok=True)
-    with open(os.path.join(ASSETS, "shooter.svg"), "w", encoding="utf-8") as f:
-        f.write(svg)
-    info["bytes"] = len(svg)
+    for theme in ("light", "dark"):
+        THEME.use(theme)
+        svg, info = build(user)
+        with open(os.path.join(ASSETS, f"shooter{suffix()}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg)
+        info["bytes_" + theme] = len(svg)
     print(json.dumps(info))
 
 

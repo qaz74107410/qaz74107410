@@ -17,14 +17,32 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "fonts")
 ASSETS = os.path.join(ROOT, "assets")
 
-PAPER = "#E3ECE3"      # carbonless shipper's copy
-PAPER_DEEP = "#D3DFD4"  # pressed areas, empty cells
-FORM = "#1F5641"       # printed form ink
-FORM_SOFT = "#5E7F70"  # secondary printed text
-RULE = "#8FAA9B"       # hairline rules
-TYPED = "#1B1E26"      # typewriter ribbon
-TYPED_SOFT = "#4A4F5C"
-STAMP = "#B3302A"      # rubber stamp
+THEMES = {
+    # light: the shipper's copy on pale green carbonless paper
+    "light": dict(PAPER="#E3ECE3", PAPER_DEEP="#D3DFD4", FORM="#1F5641", FORM_SOFT="#5E7F70",
+                  RULE="#8FAA9B", TYPED="#1B1E26", TYPED_SOFT="#4A4F5C", STAMP="#B3302A",
+                  LEVELS=["#D3DFD4", "#8DAE9C", "#5E8C75", "#3B6B55", "#1F5641"]),
+    # dark: the same form read off the carbon sheet, light ink on deep green-black,
+    # kept a step above GitHub's dark canvas so it still reads as a sheet
+    "dark": dict(PAPER="#17201C", PAPER_DEEP="#1F2A25", FORM="#8DBFA5", FORM_SOFT="#6F9383",
+                 RULE="#34463D", TYPED="#DCE3DE", TYPED_SOFT="#A3AFA8", STAMP="#E06A5E",
+                 LEVELS=["#1F2A25", "#2F5243", "#3F7A60", "#5FA483", "#8DBFA5"]),
+}
+
+
+class _Theme:
+    def use(self, name):
+        self.name = name
+        self.__dict__.update(THEMES[name])
+        return self
+
+
+T = _Theme().use("light")
+
+
+def suffix():
+    return "" if T.name == "light" else "-dark"
+
 
 FACES = {
     "label": ("Archivo-SemiCondensed-Medium.ttf", "BL Label"),
@@ -67,7 +85,8 @@ class Sheet:
     def raw(self, s):
         self.body.append(s)
 
-    def text(self, x, y, s, kind="typed", size=14, fill=TYPED, anchor="start", extra=""):
+    def text(self, x, y, s, kind="typed", size=14, fill=None, anchor="start", extra=""):
+        fill = fill or T.TYPED
         self.used[kind].update(str(s))
         fam = FACES[kind][1]
         a = "" if anchor == "start" else f' text-anchor="{anchor}"'
@@ -75,14 +94,17 @@ class Sheet:
             f'<text x="{x}" y="{y}" font-family="\'{fam}\'" font-size="{size}" fill="{fill}"{a} {extra}>'
             f'{esc(s)}</text>')
 
-    def label(self, x, y, s, size=10.5, fill=FORM, anchor="start"):
+    def label(self, x, y, s, size=10.5, fill=None, anchor="start"):
+        fill = fill or T.FORM
         self.text(x, y, s, "label", size, fill, anchor, 'letter-spacing="0.5"')
 
-    def hline(self, y, x0=0, x1=None, color=RULE, w=1):
+    def hline(self, y, x0=0, x1=None, color=None, w=1):
+        color = color or T.RULE
         x1 = self.w if x1 is None else x1
         self.body.append(f'<rect x="{x0}" y="{y - w / 2:.1f}" width="{x1 - x0}" height="{w}" fill="{color}"/>')
 
-    def vline(self, x, y0, y1, color=RULE, w=1):
+    def vline(self, x, y0, y1, color=None, w=1):
+        color = color or T.RULE
         self.body.append(f'<rect x="{x - w / 2:.1f}" y="{y0}" width="{w}" height="{y1 - y0}" fill="{color}"/>')
 
     def render(self, top=False, bottom=False):
@@ -92,16 +114,16 @@ class Sheet:
             f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'role="img" aria-label="{esc(self.aria)}">',
             f"<style>{css}</style>",
-            f'<rect width="{w}" height="{h}" fill="{PAPER}"/>',
+            f'<rect width="{w}" height="{h}" fill="{T.PAPER}"/>',
         ]
         out += self.body
         # the sheet's outer frame: sides on every slice, top/bottom only at the ends
-        out.append(f'<rect x="0" y="0" width="2" height="{h}" fill="{FORM}"/>')
-        out.append(f'<rect x="{w - 2}" y="0" width="2" height="{h}" fill="{FORM}"/>')
+        out.append(f'<rect x="0" y="0" width="2" height="{h}" fill="{T.FORM}"/>')
+        out.append(f'<rect x="{w - 2}" y="0" width="2" height="{h}" fill="{T.FORM}"/>')
         if top:
-            out.append(f'<rect x="0" y="0" width="{w}" height="2" fill="{FORM}"/>')
+            out.append(f'<rect x="0" y="0" width="{w}" height="2" fill="{T.FORM}"/>')
         if bottom:
-            out.append(f'<rect x="0" y="{h - 2}" width="{w}" height="2" fill="{FORM}"/>')
+            out.append(f'<rect x="0" y="{h - 2}" width="{w}" height="2" fill="{T.FORM}"/>')
         out.append("</svg>\n")
         return "\n".join(out)
 
