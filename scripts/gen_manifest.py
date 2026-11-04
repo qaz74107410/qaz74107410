@@ -135,6 +135,39 @@ def stc_row(g, h=84):
     return s.render()
 
 
+def stars(n):
+    return f"{n} stars" if n < 1000 else f"{n / 1000:.1f}".rstrip("0").rstrip(".") + "k stars"
+
+
+def tranship_head(h=36):
+    s = Sheet(W, h, "Also carried: pull requests merged into other people's open-source projects")
+    s.raw(f'<rect x="0" y="0" width="{W}" height="{h}" fill="{T.PAPER_DEEP}"/>')
+    s.label(20, 23, "Also carried, merged upstream")
+    s.label(C1 + 16, 23, "Change")
+    s.label(C2 + 16, 23, "Pull request")
+    s.vline(C1, 0, h)
+    s.vline(C2, 0, h)
+    s.hline(h - 0.5)
+    return s.render()
+
+
+def tranship_row(g, repo, pr, h=84):
+    s = Sheet(W, h, f"Merged into {g['repo']}, pull request {g['pr']}: {g['title']}. {g['desc']}")
+    s.vline(C1, 0, h)
+    s.vline(C2, 0, h)
+    s.text(20, 31, g["repo"], "typedb", 14)
+    sub = " · ".join(x for x in (repo.get("language"), stars(repo.get("stargazers_count", 0))) if x)
+    s.label(20, 53, sub, 11, T.FORM_SOFT)
+    s.text(C1 + 16, 31, g["title"], "typedb", 15)
+    for i, line in enumerate(wrap(g["desc"], 46)[:2]):
+        s.text(C1 + 16, 53 + i * 18, line, "typed", 13.5, T.TYPED_SOFT)
+    s.text(C2 + 16, 31, f"PR #{g['pr']}, merged", "typed", 14)
+    s.label(C2 + 16, 56, "open pull request", 11, T.FORM)
+    arrow(s, C2 + 116, 52)
+    s.hline(h - 0.5)
+    return s.render()
+
+
 def foot(now):
     s = Sheet(W, 236, "Remarks and stamp: shipped on board, issued at Nonthaburi")
     s.label(20, 26, "Remarks, measured on board")
@@ -168,6 +201,11 @@ def main():
     data = json.load(open(os.path.join(ROOT, "projects.json"), encoding="utf-8"))
     now = datetime.now(timezone(timedelta(hours=7)))  # Bangkok: the place of issue
     metas = [api(f"repos/{login}/{g['repo']}", token) for g in data["goods"]]
+    carried = []
+    for g in data.get("also_carried", []):
+        pr = api(f"repos/{g['repo']}/pulls/{g['pr']}", token)
+        if pr.get("merged_at"):          # only merged work goes on the sheet
+            carried.append((g, api(f"repos/{g['repo']}", token), pr))
     sizes = {}
     for theme in ("light", "dark"):
         T.use(theme)
@@ -176,6 +214,11 @@ def main():
         for i, (g, meta) in enumerate(zip(data["goods"], metas), 1):
             sizes[f"bl-goods-{i}{sfx}.svg"] = write(f"bl-goods-{i}{sfx}.svg", goods_row(g, meta))
         sizes[f"bl-stc{sfx}.svg"] = write(f"bl-stc{sfx}.svg", stc_row(data["said_to_contain"]))
+        if carried:
+            sizes[f"bl-tranship{sfx}.svg"] = write(f"bl-tranship{sfx}.svg", tranship_head())
+            for i, (g, repo, pr) in enumerate(carried, 1):
+                name = f"bl-tranship-{i}{sfx}.svg"
+                sizes[name] = write(name, tranship_row(g, repo, pr))
         sizes[f"bl-foot{sfx}.svg"] = write(f"bl-foot{sfx}.svg", foot(now))
     print(json.dumps(sizes))
 

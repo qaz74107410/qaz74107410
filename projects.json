@@ -29,5 +29,31 @@
     "title": "Payment gateway and MVAS services",
     "desc": "Go workers and schedulers on NSQ, MongoDB, SMS / USSD / IVR operator integrations.",
     "measure": "private, AddTech Hub"
-  }
+  },
+  "also_carried": [
+    {
+      "repo": "herdrdev/herdr",
+      "pr": 2340,
+      "title": "ctrl+[ leaves navigate mode",
+      "desc": "Under the kitty keyboard protocol ctrl+[ is its own key, not Esc; now it cancels too."
+    },
+    {
+      "repo": "AltanS/collie",
+      "pr": 93,
+      "title": "Harness adapter for omp",
+      "desc": "A reply from the phone no longer confirms a picker by accident: type, verify, then submit."
+    },
+    {
+      "repo": "salsita/node-pg-migrate",
+      "pr": 1823,
+      "title": "Column defaults documented",
+      "desc": "What default accepts, and null versus omitted; every example run on PostgreSQL 17."
+    },
+    {
+      "repo": "jemishavasoya/dev-cleaner",
+      "pr": 43,
+      "title": "--dry-run deletes nothing",
+      "desc": "Six cleanup functions deleted for real during a dry run; routed them through safe_rm."
+    }
+  ]
 }
