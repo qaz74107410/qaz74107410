@@ -14,7 +14,7 @@
   <rect x="0.75" y="0.75" width="818.5" height="198.5" rx="15.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
   <text x="26" y="32" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="11.5" letter-spacing="2.6" fill="#8B949E">CONTRIBUTIONS · LAST 12 MONTHS</text>
   <rect x="26" y="40" width="26" height="2" rx="1" fill="url(#accent)"/>
-  <text x="794" y="32" text-anchor="end" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="12" fill="#E6EDF3">816 total</text>
+  <text x="794" y="32" text-anchor="end" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="12" fill="#E6EDF3">818 total</text>
   <text x="52" y="54" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Nov</text>
   <text x="122" y="54" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Dec</text>
   <text x="178" y="54" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Jan</text>
@@ -72,8 +72,8 @@
   <rect x="136" y="76" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-16: 0</title></rect>
   <rect x="136" y="90" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-17: 0</title></rect>
   <rect x="136" y="104" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-18: 0</title></rect>
-  <rect x="136" y="118" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-19: 0</title></rect>
-  <rect x="136" y="132" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2025-12-20: 2</title></rect>
+  <rect x="136" y="118" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2025-12-19: 1</title></rect>
+  <rect x="136" y="132" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2025-12-20: 1</title></rect>
   <rect x="150" y="146" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-21: 0</title></rect>
   <rect x="150" y="62" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-22: 0</title></rect>
   <rect x="150" y="76" width="11" height="11" rx="2.5" fill="#0E1620"><title>2025-12-23: 0</title></rect>
@@ -338,8 +338,8 @@
   <rect x="668" y="76" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-09-08: 0</title></rect>
   <rect x="668" y="90" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-09-09: 0</title></rect>
   <rect x="668" y="104" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-09-10: 0</title></rect>
-  <rect x="668" y="118" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-09-11: 0</title></rect>
-  <rect x="668" y="132" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-09-12: 8</title></rect>
+  <rect x="668" y="118" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-09-11: 1</title></rect>
+  <rect x="668" y="132" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-09-12: 7</title></rect>
   <rect x="682" y="146" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-09-13: 14</title></rect>
   <rect x="682" y="62" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-09-14: 0</title></rect>
   <rect x="682" y="76" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-09-15: 7</title></rect>
@@ -380,9 +380,9 @@
   <rect x="752" y="76" width="11" height="11" rx="2.5" fill="#34D399"><title>2026-10-20: 221</title></rect>
   <rect x="752" y="90" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-21: 10</title></rect>
   <rect x="752" y="104" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-10-22: 0</title></rect>
-  <rect x="752" y="118" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-23: 18</title></rect>
-  <rect x="752" y="132" width="11" height="11" rx="2.5" fill="#166B4E"><title>2026-10-24: 69</title></rect>
-  <rect x="766" y="146" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-25: 33</title></rect>
+  <rect x="752" y="118" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-23: 21</title></rect>
+  <rect x="752" y="132" width="11" height="11" rx="2.5" fill="#166B4E"><title>2026-10-24: 71</title></rect>
+  <rect x="766" y="146" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-25: 28</title></rect>
   <rect x="766" y="62" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-10-26: 6</title></rect>
   <rect x="766" y="76" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-10-27: 0</title></rect>
   <rect x="766" y="90" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-10-28: 0</title></rect>
@@ -392,7 +392,7 @@
   <rect x="780" y="146" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-11-01: 7</title></rect>
   <rect x="780" y="62" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-11-02: 4</title></rect>
   <rect x="780" y="76" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-11-03: 0</title></rect>
-  <rect x="780" y="90" width="11" height="11" rx="2.5" fill="#0E1620"><title>2026-11-04: 0</title></rect>
+  <rect x="780" y="90" width="11" height="11" rx="2.5" fill="#0F3A2E"><title>2026-11-04: 2</title></rect>
   <text x="26" y="71" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Mon</text>
   <text x="26" y="99" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Wed</text>
   <text x="26" y="127" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10" fill="#6E7681">Fri</text>
