@@ -83,35 +83,35 @@ def card(p, meta):
         s.append(f'  <rect x="0" y="0" width="{W}" height="3" rx="1.5" fill="url(#ac)"/>')
 
     # index + stars
-    s.append(f'  <text x="26" y="36" font-family="{MONO}" font-size="11" letter-spacing="1.6" '
+    s.append(f'  <text x="26" y="36" font-family="{MONO}" font-size="12" letter-spacing="1.6" '
              f'fill="{DIM}">{esc(p["index"])}</text>')
     star_txt = f'★ {stars}' if stars else '☆ 0'
-    s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{FONT}" font-size="12" '
+    s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{FONT}" font-size="13" '
              f'fill="{EMERALD if stars else DIM}">{esc(star_txt)}</text>')
 
     # title
-    s.append(f'  <text x="26" y="76" font-family="{FONT}" font-size="19" font-weight="700" '
+    s.append(f'  <text x="26" y="78" font-family="{FONT}" font-size="21" font-weight="700" '
              f'fill="{TEXT}">{esc(p["title"])}</text>')
 
     # authored hook, two lines
     for i, line in enumerate(p["hook"][:2]):
-        s.append(f'  <text x="26" y="{102 + i * 18}" font-family="{FONT}" font-size="12.5" '
+        s.append(f'  <text x="26" y="{106 + i * 19}" font-family="{FONT}" font-size="14" '
                  f'fill="{MUTED}">{esc(line)}</text>')
 
     # divider
-    s.append(f'  <line x1="26" y1="136" x2="{W - 26}" y2="136" stroke="{STROKE}" stroke-width="1"/>')
+    s.append(f'  <line x1="26" y1="140" x2="{W - 26}" y2="140" stroke="{STROKE}" stroke-width="1"/>')
 
     # tag chip
     tag = p["tag"]
-    tw = 13 + len(tag) * 6.3 + 13
-    s.append(f'  <rect x="26" y="148" width="{tw:.1f}" height="20" rx="10" fill="{PANEL}" '
+    tw = 14 + len(tag) * 6.6 + 14
+    s.append(f'  <rect x="26" y="150" width="{tw:.1f}" height="20" rx="10" fill="{PANEL}" '
              f'stroke="{STROKE}" stroke-width="1"/>')
-    s.append(f'  <text x="{26 + tw / 2:.1f}" y="162" text-anchor="middle" font-family="{FONT}" '
-             f'font-size="10.5" fill="{EMERALD}">{esc(tag)}</text>')
+    s.append(f'  <text x="{26 + tw / 2:.1f}" y="164" text-anchor="middle" font-family="{FONT}" '
+             f'font-size="11" fill="{EMERALD}">{esc(tag)}</text>')
 
     # language + pushed
     right = f"{lang}  ·  {pushed}" if pushed else lang
-    s.append(f'  <text x="{W - 26}" y="162" text-anchor="end" font-family="{FONT}" font-size="10.5" '
+    s.append(f'  <text x="{W - 26}" y="164" text-anchor="end" font-family="{FONT}" font-size="11.5" '
              f'fill="{DIM}">{esc(right)}</text>')
     s.append("</svg>\n")
     return "".join(s)
