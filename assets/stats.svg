@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="150" viewBox="0 0 900 150" role="img" aria-label="GitHub stats">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="60%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8B949E" stroke-width="1" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="150" rx="16" fill="#0B0F14"/>
+  <rect width="900" height="150" rx="16" fill="url(#grid)"/>
+  <rect x="0.75" y="0.75" width="898.5" height="148.5" rx="15.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
+  <g transform="translate(26.0,24)">
+    <rect x="0" y="0" width="200.0" height="102" rx="14" fill="#101820" fill-opacity="0.85"/>
+    <rect x="0.75" y="0.75" width="198.5" height="100.5" rx="13.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
+    <rect x="0" y="0" width="3" height="102" rx="1.5" fill="url(#accent)"/>
+    <text x="18" y="30" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10.5" letter-spacing="1.4" fill="#8B949E">PUBLIC REPOS</text>
+    <text x="18" y="68" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#E6EDF3">23</text>
+    <text x="18" y="88" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="11.5" fill="#6E7681">owned, non-fork</text>
+  </g>
+  <g transform="translate(242.0,24)">
+    <rect x="0" y="0" width="200.0" height="102" rx="14" fill="#101820" fill-opacity="0.85"/>
+    <rect x="0.75" y="0.75" width="198.5" height="100.5" rx="13.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
+    <rect x="0" y="0" width="3" height="102" rx="1.5" fill="url(#accent)"/>
+    <text x="18" y="30" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10.5" letter-spacing="1.4" fill="#8B949E">STARS EARNED</text>
+    <text x="18" y="68" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#E6EDF3">6</text>
+    <text x="18" y="88" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="11.5" fill="#6E7681">across public repos</text>
+  </g>
+  <g transform="translate(458.0,24)">
+    <rect x="0" y="0" width="200.0" height="102" rx="14" fill="#101820" fill-opacity="0.85"/>
+    <rect x="0.75" y="0.75" width="198.5" height="100.5" rx="13.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
+    <rect x="0" y="0" width="3" height="102" rx="1.5" fill="url(#accent)"/>
+    <text x="18" y="30" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10.5" letter-spacing="1.4" fill="#8B949E">COMMITS · 12 MO</text>
+    <text x="18" y="68" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#E6EDF3">791</text>
+    <text x="18" y="88" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="11.5" fill="#6E7681">816 contributions</text>
+  </g>
+  <g transform="translate(674.0,24)">
+    <rect x="0" y="0" width="200.0" height="102" rx="14" fill="#101820" fill-opacity="0.85"/>
+    <rect x="0.75" y="0.75" width="198.5" height="100.5" rx="13.25" fill="none" stroke="#1E2A33" stroke-width="1.5"/>
+    <rect x="0" y="0" width="3" height="102" rx="1.5" fill="url(#accent)"/>
+    <text x="18" y="30" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="10.5" letter-spacing="1.4" fill="#8B949E">LONGEST STREAK</text>
+    <text x="18" y="68" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="30" font-weight="700" fill="#E6EDF3">11d</text>
+    <text x="18" y="88" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif" font-size="11.5" fill="#6E7681">current 0d</text>
+  </g>
+</svg>
