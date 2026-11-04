@@ -64,4 +64,19 @@ A second optimization (skipping an unchanged inventory snapshot) is shipped but 
 
 <img src="./assets/langs.svg" alt="Language mix across public repositories" width="100%" />
 
-<sub>Banner, language and project cards are generated from the GitHub API by scripts in <a href="./scripts"><code>scripts/</code></a> and refreshed daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a>.</sub>
+<details>
+<summary><b>🎮 Just for fun: my last 12 months, played back</b> (click to open)</summary>
+
+<br />
+
+Every active day is an invader; the ship clears the wave, then a new one spawns tomorrow.
+
+<img src="./assets/shooter.svg" alt="Space shooter: every active day of the last 12 months is an invader, and a ship clears the wave" width="100%" />
+
+The same year as a city, one building per day:
+
+<img src="./profile-3d-contrib/profile-night-green.svg" alt="3D contribution graph, last 12 months" width="100%" />
+
+</details>
+
+<sub>Banner, language, project and shooter cards are generated from the GitHub API by scripts in <a href="./scripts"><code>scripts/</code></a> and refreshed daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a>.</sub>
