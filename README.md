@@ -1,82 +1,20 @@
-<div align="center">
-  <img src="./assets/banner.svg" alt="Komsan Nipharat — full-stack engineer: Go, TypeScript, NestJS, MongoDB" width="100%" />
-</div>
-
-<br />
-
-I'm a full-stack engineer in Thailand, currently at **GRAM Software Solution** building container and yard-operations software. Before that, at **AddTech Hub**, I owned payment-gateway and mobile value-added services that had to settle against real telecom networks: Go workers and schedulers on NSQ, MongoDB query work on live services, and SMS / USSD / IVR operator integrations. I started out as a research assistant at **NECTEC**.
-
-Most of that work is private. This page shows the public side: small tools, a profiled performance fix, and how I work.
-
 <p>
-  <img src="https://img.shields.io/badge/Go-0B0F14?style=flat-square&logo=go&logoColor=34D399" alt="Go" />
-  <img src="https://img.shields.io/badge/TypeScript-0B0F14?style=flat-square&logo=typescript&logoColor=34D399" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Node.js-0B0F14?style=flat-square&logo=nodedotjs&logoColor=34D399" alt="Node.js" />
-  <img src="https://img.shields.io/badge/NestJS-0B0F14?style=flat-square&logo=nestjs&logoColor=34D399" alt="NestJS" />
-  <img src="https://img.shields.io/badge/MongoDB-0B0F14?style=flat-square&logo=mongodb&logoColor=34D399" alt="MongoDB" />
-  <img src="https://img.shields.io/badge/Redis-0B0F14?style=flat-square&logo=redis&logoColor=34D399" alt="Redis" />
-  <img src="https://img.shields.io/badge/Angular-0B0F14?style=flat-square&logo=angular&logoColor=34D399" alt="Angular" />
-  <img src="https://img.shields.io/badge/React-0B0F14?style=flat-square&logo=react&logoColor=34D399" alt="React" />
-  <img src="https://img.shields.io/badge/AWS-0B0F14?style=flat-square&logo=amazonwebservices&logoColor=34D399" alt="AWS" />
-  <img src="https://img.shields.io/badge/Docker-0B0F14?style=flat-square&logo=docker&logoColor=34D399" alt="Docker" />
+<a href="https://my-portflio-navy.vercel.app"><img src="./assets/bl-head.svg" width="100%" align="top" alt="Bill of lading. Shipper: Komsan Nipharat, full-stack engineer, Pak Kret, Nonthaburi, Thailand. Route: NECTEC research assistant 2017–2020, AddTech Hub payments and MVAS 2020–2023, GRAM Software Solution container yard operations 2023–present. Packed with Go, TypeScript, Node.js, NestJS, MongoDB, Redis, Angular, React, AWS, Docker." /></a><br><a href="https://github.com/qaz74107410/toms-storage-search-cache"><img src="./assets/bl-goods-1.svg" width="100%" align="top" alt="toms-storage-search-cache: profiled a per-keystroke render stall and fixed it by changing cache lifetime, not logic. 175 to 43 samples." /></a><br><a href="https://github.com/qaz74107410/my-jira-webui"><img src="./assets/bl-goods-2.svg" width="100%" align="top" alt="my-jira-webui: Jira issues grouped by parent, so a project reads like a tree. Jest-tested, live." /></a><br><a href="https://github.com/qaz74107410/random-container-no"><img src="./assets/bl-goods-3.svg" width="100%" align="top" alt="random-container-no: ISO 6346 container numbers and check digits, generated and validated in the browser." /></a><br><a href="https://github.com/qaz74107410/phasmo-notebooklm-bot"><img src="./assets/bl-goods-4.svg" width="100%" align="top" alt="phasmo-notebooklm-bot: a Discord bot that owns no model; it answers from your own NotebookLM notebook." /></a><br><img src="./assets/bl-stc.svg" width="100%" align="top" alt="Said to contain: payment gateway and MVAS services, Go workers and schedulers on NSQ, MongoDB, SMS / USSD / IVR operator integrations. Private, AddTech Hub." /><br><img src="./assets/bl-foot.svg" width="100%" align="top" alt="Remarks: Tom's Storage fix measured with Java Flight Recorder, search samples 175 to 43, tooltip builds 167 to 10. Stamped shipped on board at Nonthaburi." />
 </p>
 
-<p>
-  <a href="https://my-portflio-navy.vercel.app"><img src="https://img.shields.io/badge/Portfolio_&_CV-34D399?style=for-the-badge&logo=vercel&logoColor=0B0F14" alt="Portfolio and CV" /></a>
-  <a href="https://www.linkedin.com/in/komsan-nipharat-187573211"><img src="https://img.shields.io/badge/LinkedIn-0B0F14?style=for-the-badge&logo=linkedin&logoColor=34D399" alt="LinkedIn" /></a>
-</p>
+Most of my work ships in private repositories: payment and telecom services at AddTech Hub, container-yard software at GRAM. The cargo above is the public part. Each line opens its repository.
 
-## Public projects
+**How I work.** I measure before I claim anything, and label untested work as untested. Long-running jobs go to a queue and a worker that can retry, not into the HTTP request. I leave behind documented schemas and a deploy the next person can run.
 
-<table>
-  <tr>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/toms-storage-search-cache"><img src="./assets/project-01.svg" width="100%" alt="Tom's Storage Search Cache" /></a></td>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/my-jira-webui"><img src="./assets/project-02.svg" width="100%" alt="Jira Issues Web UI" /></a></td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/random-container-no"><img src="./assets/project-03.svg" width="100%" alt="Container Number Generator" /></a></td>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/phasmo-notebooklm-bot"><img src="./assets/project-04.svg" width="100%" alt="Phasmo NotebookLM Bot" /></a></td>
-  </tr>
-</table>
-
-## Case study: a performance fix, measured first
-
-**[toms-storage-search-cache](https://github.com/qaz74107410/toms-storage-search-cache)** is a Java client mod (Forge 1.20.1) for a storage-terminal search that froze on every keystroke in large modpacks.
-
-- **Cause.** Each search rebuilt hundreds of item tooltips on the render thread, because the stock cache expired them after 5 seconds of inactivity.
-- **Fix.** A mixin wraps those caches in longer-lived ones whose loader *is* the stock cache. Results stay identical; only the cache lifetime changes, and it is configurable back to stock.
-- **Evidence.** Java Flight Recorder, about 4 s of continuous typing in a ~365-mod pack:
-
-| Render-thread samples | Before | After |
-| :--- | ---: | ---: |
-| Search total | 175 | **43** |
-| Tooltip building | 167 | **10** |
-
-A second optimization (skipping an unchanged inventory snapshot) is shipped but marked *not yet tested in game* in the README rather than claimed.
-
-## How I work
-
-- **Measure before claiming.** Profiles and numbers first; untested work gets labelled as untested.
-- **Keep the request thin.** Long-running work goes to a queue and a worker that can retry, not into the HTTP request.
-- **Leave it operable.** Documented schemas, clear failure modes, and a deploy the next person can run.
-
-<br />
-
-<img src="./assets/langs.svg" alt="Language mix across public repositories" width="100%" />
+[Portfolio and CV](https://my-portflio-navy.vercel.app) · [LinkedIn](https://www.linkedin.com/in/komsan-nipharat-187573211)
 
 <details>
-<summary><b>🎮 Just for fun: my last 12 months, played back</b> (click to open)</summary>
+<summary><b>Voyage log</b>: my last 12 months, played back</summary>
 
-<br />
+<br>
 
-Every active day is an invader; the ship clears the wave, then a new one spawns tomorrow.
-
-<img src="./assets/shooter.svg" alt="Space shooter: every active day of the last 12 months is an invader, and a ship clears the wave" width="100%" />
-
-The same year as a city, one building per day:
-
-<img src="./profile-3d-contrib/profile-night-green.svg" alt="3D contribution graph, last 12 months" width="100%" />
+<img src="./assets/shooter.svg" width="100%" alt="Voyage log: each active day of the last 12 months is a cargo box; a ship clears them one by one, then a stamp reads all cargo cleared." />
 
 </details>
 
-<sub>Banner, language, project and shooter cards are generated from the GitHub API by scripts in <a href="./scripts"><code>scripts/</code></a> and refreshed daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a>.</sub>
+<sub>Every sheet is generated from the GitHub API by <a href="./scripts"><code>scripts/</code></a> and retyped daily by <a href="./.github/workflows/refresh-cards.yml">a workflow</a>. Set in Archivo and Courier Prime, both under the <a href="./fonts">SIL Open Font License</a>.</sub>

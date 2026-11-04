@@ -1,38 +1,33 @@
 {
-  "projects": [
+  "goods": [
     {
       "repo": "toms-storage-search-cache",
-      "index": "01",
-      "title": "Tom's Storage Search Cache",
-      "hook": ["Profiled a render-thread stall, fixed it", "by changing cache lifetime, not logic."],
-      "tag": "Java · mixins · JFR",
-      "metric": "−75% render thread",
-      "featured": true
+      "title": "Tom's Storage search cache",
+      "desc": "Profiled a per-keystroke render stall; fixed it by changing cache lifetime, not logic.",
+      "measure": "175 to 43 samples"
     },
     {
       "repo": "my-jira-webui",
-      "index": "02",
-      "title": "Jira Issues Web UI",
-      "hook": ["Issues grouped by parent, so a project", "reads like a tree instead of a list."],
-      "tag": "Next.js · Jest",
-      "metric": "tested · live demo",
-      "featured": true
+      "title": "Jira issues web UI",
+      "desc": "Issues grouped by parent, so a project reads like a tree instead of a list.",
+      "measure": "Jest-tested, live"
     },
     {
       "repo": "random-container-no",
-      "index": "03",
-      "title": "Container Number Generator",
-      "hook": ["ISO 6346 check digits, generated and", "validated in the browser."],
-      "tag": "Logistics · TypeScript",
-      "featured": false
+      "title": "Container number generator",
+      "desc": "ISO 6346 owner codes and check digits, generated and validated in the browser.",
+      "measure": "ISO 6346"
     },
     {
       "repo": "phasmo-notebooklm-bot",
-      "index": "04",
-      "title": "Phasmo NotebookLM Bot",
-      "hook": ["A Discord bot that owns no model — it", "proxies your own NotebookLM notebook."],
-      "tag": "Python · Docker",
-      "featured": false
+      "title": "Phasmo NotebookLM bot",
+      "desc": "A Discord bot that owns no model; it answers from your own NotebookLM notebook.",
+      "measure": "Docker, MIT"
     }
-  ]
+  ],
+  "said_to_contain": {
+    "title": "Payment gateway and MVAS services",
+    "desc": "Go workers and schedulers on NSQ, MongoDB, SMS / USSD / IVR operator integrations.",
+    "measure": "private, AddTech Hub"
+  }
 }

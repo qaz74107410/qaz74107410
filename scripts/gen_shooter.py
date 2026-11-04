@@ -19,15 +19,18 @@ import sys
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_cards import (  # noqa: E402
-    ASSETS, DIM, EMERALD, FONT, LEVEL_COLORS, MUTED, TEXT,
-    esc, graphql, head, title,
+from gen_cards import graphql  # noqa: E402
+from manifest_style import (  # noqa: E402
+    ASSETS, FORM, FORM_SOFT, PAPER, PAPER_DEEP, RULE, STAMP, TYPED, TYPED_SOFT, Sheet,
 )
+
+# box fills by activity level: form-ink tints on the paper
+LEVELS = [PAPER_DEEP, "#8DAE9C", "#5E8C75", "#3B6B55", FORM]
 
 CELL, GAP = 11, 3
 STEP = CELL + GAP
-GX, GY = 52, 70            # grid origin
-SHIP_Y = GY + 7 * STEP + 92
+GX, GY = 56, 78            # grid origin
+SHIP_Y = GY + 7 * STEP + 70
 FLIGHT = 0.16              # seconds a bullet is in the air
 SPEED = 1500.0             # ship travel, px per second
 MIN_MOVE = 0.05
@@ -61,8 +64,8 @@ def build(user):
     targets.sort(key=lambda t: (t["wi"], -t["row"]))
 
     grid_w = len(weeks) * STEP - GAP
-    W = max(GX + grid_w + 26, 820)
-    H = SHIP_Y + 52
+    W = 880
+    H = SHIP_Y + 66
     home = GX + grid_w / 2.0
 
     # --- timeline -----------------------------------------------------------
@@ -111,86 +114,78 @@ def build(user):
     bullet_o.append(0)
     bullet_ot.append(T)
 
-    # --- svg ----------------------------------------------------------------
+    # --- svg: the voyage log, on the same carbonless paper as the B/L --------
     total = cal["totalContributions"]
-    s = [head(W, H, f"Space shooter: {len(targets)} contribution days, {total} contributions")]
-    s.append(title(26, 32, "SPACE SHOOTER · LAST 12 MONTHS OF COMMITS AS INVADERS"))
-    s.append(f'  <text x="{W - 26}" y="32" text-anchor="end" font-family="{FONT}" font-size="12" '
-             f'fill="{TEXT}">SCORE <tspan fill="{EMERALD}" font-weight="700">{total:,}</tspan></text>\n')
+    sh = Sheet(W, H, f"Voyage log: {len(targets)} active days, {total} contributions; "
+                     "a ship clears each day of the last 12 months, then the wave resets")
+    sh.text(22, 36, "VOYAGE LOG", "title", 22, FORM, extra='letter-spacing="0.4"')
+    sh.label(176, 35, "Last 12 months, one cargo box per active day", 11.5, FORM_SOFT)
+    sh.label(W - 22, 22, "Cargo cleared", 10.5, FORM, "end")
+    sh.text(W - 22, 42, f"{total:,} contributions", "typedb", 15, TYPED, "end")
+    sh.hline(54, color=FORM, w=1.5)
+    for row, name in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
+        sh.label(20, GY + row * STEP + 9, name, 9.5, FORM_SOFT)
 
-    # starfield
-    rnd = random.Random(7410)
-    for _ in range(46):
-        sx, sy = rnd.uniform(20, W - 20), rnd.uniform(48, H - 14)
-        if GX - 6 < sx < GX + grid_w + 6 and GY - 6 < sy < GY + 7 * STEP + 6:
-            continue
-        r = rnd.choice((0.6, 0.8, 1.1))
-        d = rnd.uniform(1.8, 4.5)
-        s.append(f'  <circle cx="{sx:.0f}" cy="{sy:.0f}" r="{r}" fill="#CFE9DE">'
-                 f'<animate attributeName="opacity" values="0.15;0.8;0.15" dur="{d:.1f}s" '
-                 f'begin="{rnd.uniform(0, 3):.1f}s" repeatCount="indefinite"/></circle>\n')
-
-    # invader grid (bobs gently)
-    s.append('  <g>\n')
-    s.append('    <animateTransform attributeName="transform" type="translate" '
-             'values="0,0;0,3;0,0" dur="2.4s" repeatCount="indefinite"/>\n')
+    sh.raw('<g>')
+    sh.raw('<animateTransform attributeName="transform" type="translate" '
+           'values="0,0;0,2;0,0" dur="2.4s" repeatCount="indefinite"/>')
     for x, y in cells:
-        s.append(f'    <rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="2.5" fill="{LEVEL_COLORS[0]}"/>\n')
+        sh.raw(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="1.5" fill="{PAPER_DEEP}"/>')
     for tg in targets:
         h = tg["hit"]
-        s.append(
-            f'    <rect x="{tg["x"]}" y="{tg["y"]}" width="{CELL}" height="{CELL}" rx="2.5" '
-            f'fill="{LEVEL_COLORS[tg["lvl"]]}"><title>{tg["date"]}: {tg["count"]}</title>'
+        sh.raw(
+            f'<rect x="{tg["x"]}" y="{tg["y"]}" width="{CELL}" height="{CELL}" rx="1.5" '
+            f'fill="{LEVELS[tg["lvl"]]}"><title>{tg["date"]}: {tg["count"]}</title>'
             f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="{kt([0, h, h + 0.1, T])}" '
-            f'dur="{T:.2f}s" repeatCount="indefinite"/></rect>\n')
+            f'dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
         cx, cy = tg["x"] + CELL / 2.0, tg["y"] + CELL / 2.0
         k = kt([0, h, h + eps, h + 0.38, T])
-        s.append(
-            f'    <circle cx="{cx}" cy="{cy}" r="2" fill="none" stroke="#B9FBE0" stroke-width="1.6" opacity="0">'
-            f'<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
-            f'<animate attributeName="r" values="2;2;2;11;11" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
-            '</circle>\n')
-    s.append('  </g>\n')
+        sh.raw(
+            f'<circle cx="{cx}" cy="{cy}" r="2" fill="none" stroke="{STAMP}" stroke-width="1.5" opacity="0">'
+            f'<animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="r" values="2;2;2;10;10" keyTimes="{k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
+            '</circle>')
+    sh.raw('</g>')
 
-    # bullet
-    s.append(f'  <rect x="-1.5" y="0" width="3" height="9" rx="1.5" fill="#B9FBE0" opacity="0">\n'
-             f'    <animate attributeName="x" values="{";".join("%.1f" % (px - 1.5) for _, px in ship)}" '
-             f'keyTimes="{ship_k}" dur="{T:.2f}s" repeatCount="indefinite"/>\n'
-             f'    <animate attributeName="y" values="{";".join("%.1f" % v for v in bullet_y)}" '
-             f'keyTimes="{kt(bullet_yt)}" dur="{T:.2f}s" repeatCount="indefinite"/>\n'
-             f'    <animate attributeName="opacity" values="{";".join(map(str, bullet_o))}" '
-             f'keyTimes="{kt(bullet_ot)}" dur="{T:.2f}s" repeatCount="indefinite"/>\n'
-             '  </rect>\n')
+    # shot
+    sh.raw(f'<rect x="-1.5" y="0" width="3" height="9" rx="1.5" fill="{STAMP}" opacity="0">'
+           f'<animate attributeName="x" values="{";".join("%.1f" % (px - 1.5) for _, px in ship)}" '
+           f'keyTimes="{ship_k}" dur="{T:.2f}s" repeatCount="indefinite"/>'
+           f'<animate attributeName="y" values="{";".join("%.1f" % v for v in bullet_y)}" '
+           f'keyTimes="{kt(bullet_yt)}" dur="{T:.2f}s" repeatCount="indefinite"/>'
+           f'<animate attributeName="opacity" values="{";".join(map(str, bullet_o))}" '
+           f'keyTimes="{kt(bullet_ot)}" dur="{T:.2f}s" repeatCount="indefinite"/></rect>')
 
-    # ship
-    s.append(f'  <g transform="translate({home:.1f},{SHIP_Y})">\n'
-             f'    <animateTransform attributeName="transform" type="translate" '
-             f'values="{";".join("%.1f,%d" % (px, SHIP_Y) for _, px in ship)}" keyTimes="{ship_k}" '
-             f'dur="{T:.2f}s" repeatCount="indefinite"/>\n'
-             '    <path d="M-3 10h6l-3 7z" fill="#FBBF24">'
-             '<animate attributeName="opacity" values="1;0.35;1" dur="0.18s" repeatCount="indefinite"/></path>\n'
-             f'    <path d="M0 -13 L3 -6 L3 -2 L10 3 L10 8 L3 6 L2 10 L-2 10 L-3 6 L-10 8 L-10 3 L-3 -2 L-3 -6 Z" '
-             f'fill="{EMERALD}"/>\n'
-             '    <path d="M0 -8 L1.6 -3 L-1.6 -3 Z" fill="#0B0F14"/>\n'
-             '  </g>\n')
+    # the ship: a small container-ship hull seen from the side, drawn in form ink
+    sh.raw(f'<g transform="translate({home:.1f},{SHIP_Y})">'
+           f'<animateTransform attributeName="transform" type="translate" '
+           f'values="{";".join("%.1f,%d" % (px, SHIP_Y) for _, px in ship)}" keyTimes="{ship_k}" '
+           f'dur="{T:.2f}s" repeatCount="indefinite"/>'
+           f'<path d="M-22 2 L22 2 L17 11 L-18 11 Z" fill="{FORM}"/>'
+           f'<rect x="-17" y="-6" width="9" height="7" fill="{STAMP}"/>'
+           f'<rect x="-7" y="-6" width="9" height="7" fill="{FORM_SOFT}"/>'
+           f'<rect x="3" y="-6" width="9" height="7" fill="{TYPED}"/>'
+           f'<rect x="-2" y="-13" width="6" height="7" fill="{FORM}"/>'
+           f'<rect x="14" y="-9" width="6" height="10" fill="{FORM}"/></g>')
+    # waterline
+    sh.hline(SHIP_Y + 14, 22, W - 22, RULE)
 
-    # ground line + hud
-    s.append(f'  <rect x="26" y="{H - 22}" width="{W - 52}" height="1" fill="{MUTED}" fill-opacity="0.18"/>\n')
-    s.append(f'  <text x="26" y="{H - 8}" font-family="{FONT}" font-size="10" fill="{DIM}">'
-             f'{len(targets)} active days · peak {peak} in a day · one target per day, brighter = busier</text>\n')
-    s.append(f'  <text x="{W - 26}" y="{H - 8}" text-anchor="end" font-family="{FONT}" font-size="10" fill="{DIM}">'
-             'regenerated daily from the GitHub API</text>\n')
+    sh.hline(H - 34, color=FORM, w=1)
+    sh.text(22, H - 13, f"{len(targets)} active days. Peak {peak} in a day. Darker box, busier day.",
+            "typed", 12.5, TYPED_SOFT)
+    sh.label(W - 22, H - 14, "Retyped daily from the GitHub API", 10.5, FORM_SOFT, "end")
 
-    # wave cleared banner
-    ko = kt([0, end + 0.3, end + 0.6, T - 0.4, T])
-    s.append(f'  <g opacity="0" font-family="{FONT}" text-anchor="middle">\n'
-             f'    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="{ko}" dur="{T:.2f}s" repeatCount="indefinite"/>\n'
-             f'    <text x="{home:.0f}" y="{GY + 3.5 * STEP}" font-size="22" font-weight="700" letter-spacing="6" fill="{EMERALD}">WAVE CLEARED</text>\n'
-             f'    <text x="{home:.0f}" y="{GY + 3.5 * STEP + 22}" font-size="12" fill="{TEXT}">'
-             f'{total:,} contributions · new wave tomorrow</text>\n'
-             '  </g>\n')
-    s.append("</svg>\n")
-    return "".join(s), dict(targets=len(targets), seconds=round(T, 1), total=total)
+    # all cargo cleared: the stamp comes down, holds, lifts
+    ko = kt([0, end + 0.3, end + 0.5, T - 0.4, T])
+    sh.raw(f'<g opacity="0" transform="translate({home:.0f} {GY + 3.5 * STEP}) rotate(-6)">'
+           f'<animate attributeName="opacity" values="0;0;0.92;0.92;0" keyTimes="{ko}" dur="{T:.2f}s" repeatCount="indefinite"/>'
+           f'<rect x="-150" y="-34" width="300" height="68" rx="5" fill="{PAPER}" stroke="{STAMP}" stroke-width="3"/>'
+           f'<rect x="-143" y="-27" width="286" height="54" rx="3" fill="none" stroke="{STAMP}" stroke-width="1.2"/>')
+    sh.text(0, -2, "ALL CARGO CLEARED", "title", 22, STAMP, "middle", 'letter-spacing="1"')
+    sh.text(0, 19, "new manifest tomorrow", "typedb", 13, STAMP, "middle")
+    sh.raw('</g>')
+    svg = sh.render(top=True, bottom=True)
+    return svg, dict(targets=len(targets), seconds=round(T, 1), total=total)
 
 
 def main():

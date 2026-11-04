@@ -1,4 +1,4 @@
-name: refresh profile cards
+name: retype the bill of lading
 
 on:
   schedule:
@@ -7,10 +7,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/gen_cards.py"
-      - "scripts/gen_projects.py"
-      - "scripts/gen_shooter.py"
+      - "scripts/**"
       - "projects.json"
+      - "fonts/**"
       - ".github/workflows/refresh-cards.yml"
 
 permissions:
@@ -30,29 +29,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Render cards from the GitHub GraphQL API
+      - name: Install fontTools (subsets the embedded fonts)
+        run: pip install fonttools==4.61.1
+
+      - name: Retype the sheets from the GitHub API
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 scripts/gen_cards.py "${{ github.repository_owner }}"
+          python3 scripts/gen_manifest.py "${{ github.repository_owner }}"
           python3 scripts/gen_shooter.py "${{ github.repository_owner }}"
-          python3 scripts/gen_projects.py "${{ github.repository_owner }}"
-
-      - name: Render the 3D contribution graph
-        uses: yoshi389111/github-profile-3d-contrib@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
 
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/ projects.json profile-3d-contrib
+          git add assets/
           if git diff --quiet --cached; then
             echo "cards already up to date"
           else
-            git commit -m "chore: refresh profile cards"
+            git commit -m "chore: retype the bill of lading"
             git pull --rebase --autostash origin main
             git push
           fi
