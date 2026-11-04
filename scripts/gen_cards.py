@@ -106,6 +106,11 @@ def head(w, h, label):
         '    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">\n'
         '      <path d="M32 0H0V32" fill="none" stroke="#8B949E" stroke-width="1" stroke-opacity="0.05"/>\n'
         "    </pattern>\n"
+        '    <linearGradient id="scan" x1="0" y1="0" x2="1" y2="0">\n'
+        '      <stop offset="0%" stop-color="#34D399" stop-opacity="0"/>\n'
+        '      <stop offset="50%" stop-color="#8FF7D6" stop-opacity="0.55"/>\n'
+        '      <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>\n'
+        "    </linearGradient>\n"
         "  </defs>\n"
         f'  <rect width="{w}" height="{h}" rx="16" fill="#0B0F14"/>\n'
         f'  <rect width="{w}" height="{h}" rx="16" fill="url(#grid)"/>\n'
@@ -278,6 +283,15 @@ def contributions_svg(user):
             f'  <text x="26" y="{gy + row * (cell + gap) + 9}" font-family="{FONT}" font-size="10" '
             f'fill="{DIM}">{name}</text>\n'
         )
+
+    # animated scan sweep across the grid (SMIL survives GitHub's <img> render)
+    grid_w = len(weeks) * (cell + gap) - gap
+    grid_h = 7 * (cell + gap) - gap
+    s.append(f'  <clipPath id="hclip"><rect x="{gx}" y="{gy}" width="{grid_w}" height="{grid_h}" rx="3"/></clipPath>\n')
+    s.append('  <g clip-path="url(#hclip)">\n')
+    s.append(f'    <rect x="{gx - 100}" y="{gy}" width="100" height="{grid_h}" fill="url(#scan)">\n')
+    s.append(f'      <animate attributeName="x" values="{gx - 100};{gx + grid_w}" dur="9s" repeatCount="indefinite"/>\n')
+    s.append("    </rect>\n  </g>\n")
 
     # legend (right-aligned, fully inside the card)
     legend_w = 5 * (cell + 4)

@@ -4,6 +4,10 @@
 
 <br />
 
+<p align="center"><sub>
+<a href="#selected-work">SELECTED WORK</a> &nbsp;·&nbsp; <a href="#case-study--the-per-keystroke-freeze">CASE STUDIES</a> &nbsp;·&nbsp; <a href="#by-the-numbers">NUMBERS</a> &nbsp;·&nbsp; <a href="#how-i-work">HOW I WORK</a>
+</sub></p>
+
 I build tools that **remove friction** — a mixin that stops a Minecraft terminal from freezing on every keystroke, a bot that answers game questions out of someone's own notebook instead of a bolted-on model, a scraper that keeps retrying until the slot actually opens.
 
 Most of it is TypeScript and Python with a healthy amount of Java, and it usually ends up running on hardware I host myself.
@@ -77,6 +81,8 @@ The interesting part is auth. NotebookLM has no API key, so a one-time `notebook
 <img src="./assets/langs.svg" alt="Language mix across owned repositories" width="100%" />
 
 <img src="./assets/contributions.svg" alt="Contribution heatmap, last 12 months" width="100%" />
+
+<img src="./profile-3d-contrib/profile-night-green.svg" alt="3D contribution graph, last 12 months" width="100%" />
 
 ## How I work
 

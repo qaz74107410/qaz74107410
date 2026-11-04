@@ -6,6 +6,7 @@
       "title": "Tom's Storage Search Cache",
       "hook": ["A mixin that kills the per-keystroke", "freeze in Minecraft storage terminals."],
       "tag": "Forge mod · mixins",
+      "metric": "−75% render thread",
       "featured": true
     },
     {
@@ -14,6 +15,7 @@
       "title": "Phasmo NotebookLM Bot",
       "hook": ["A Discord bot that owns no model — it", "proxies your own NotebookLM notebook."],
       "tag": "Bot · Docker",
+      "metric": "no local model",
       "featured": true
     },
     {

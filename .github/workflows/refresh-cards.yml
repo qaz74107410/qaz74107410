@@ -34,11 +34,17 @@ jobs:
           python3 scripts/gen_cards.py "${{ github.repository_owner }}"
           python3 scripts/gen_projects.py "${{ github.repository_owner }}"
 
+      - name: Render the 3D contribution graph
+        uses: yoshi389111/github-profile-3d-contrib@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/ projects.json
+          git add assets/ projects.json profile-3d-contrib
           if git diff --quiet --cached; then
             echo "cards already up to date"
           else

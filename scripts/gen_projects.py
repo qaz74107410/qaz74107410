@@ -82,13 +82,16 @@ def card(p, meta):
     if featured:
         s.append(f'  <rect x="0" y="0" width="{W}" height="3" rx="1.5" fill="url(#ac)"/>')
 
-    # index + stars
+    # index + stars / featured metric
     s.append(f'  <text x="26" y="36" font-family="{MONO}" font-size="12" letter-spacing="1.6" '
              f'fill="{DIM}">{esc(p["index"])}</text>')
     star_txt = f'★ {stars}' if stars else ''
     if star_txt:
         s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{FONT}" font-size="13" '
                  f'fill="{EMERALD}">{esc(star_txt)}</text>')
+    elif p.get("metric"):
+        s.append(f'  <text x="{W - 26}" y="36" text-anchor="end" font-family="{MONO}" font-size="11.5" '
+                 f'fill="{EMERALD}">{esc(p["metric"])}</text>')
 
     # title
     s.append(f'  <text x="26" y="78" font-family="{FONT}" font-size="21" font-weight="700" '
