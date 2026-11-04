@@ -26,20 +26,22 @@ Most of it is TypeScript and Python with a healthy amount of Java, and it usuall
     <td width="50%" valign="top"><a href="https://github.com/qaz74107410/phasmo-notebooklm-bot"><img src="./assets/project-02.svg" width="100%" alt="Phasmo NotebookLM Bot" /></a></td>
   </tr>
   <tr>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/my-jira-webui"><img src="./assets/project-03.svg" width="100%" alt="Jira Issues Web UI" /></a></td>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/watchtower-line-notifier"><img src="./assets/project-04.svg" width="100%" alt="Watchtower LINE Notifier" /></a></td>
+    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/fb-page-scraper"><img src="./assets/project-03.svg" width="100%" alt="Facebook Page Scraper" /></a></td>
+    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/my-jira-webui"><img src="./assets/project-04.svg" width="100%" alt="Jira Issues Web UI" /></a></td>
   </tr>
   <tr>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/midi-flashcard-web"><img src="./assets/project-05.svg" width="100%" alt="Music Flashcards" /></a></td>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/project-opener-cli"><img src="./assets/project-06.svg" width="100%" alt="Project Opener" /></a></td>
+    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/project-opener-cli"><img src="./assets/project-05.svg" width="100%" alt="Project Opener" /></a></td>
+    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/midi-flashcard-web"><img src="./assets/project-06.svg" width="100%" alt="Music Flashcards" /></a></td>
   </tr>
   <tr>
     <td width="50%" valign="top"><a href="https://github.com/qaz74107410/random-container-no"><img src="./assets/project-07.svg" width="100%" alt="Container Number Generator" /></a></td>
-    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/cccregister"><img src="./assets/project-08.svg" width="100%" alt="cccregister" /></a></td>
+    <td width="50%" valign="top"><a href="https://github.com/qaz74107410/watchtower-line-notifier"><img src="./assets/project-08.svg" width="100%" alt="Watchtower LINE Notifier" /></a></td>
   </tr>
 </table>
 
 > The top two are the ones worth reading closely — each was rebuilt around a bottleneck nobody had measured yet.
+
+Also on GitHub: [cccregister](https://github.com/qaz74107410/cccregister) and a pile of older experiments from 2018–2022.
 
 ## Case study — the per-keystroke freeze
 
